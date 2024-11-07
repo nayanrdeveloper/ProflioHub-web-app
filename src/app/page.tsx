@@ -1,21 +1,15 @@
 'use client';
 
-import { apiCall } from '@/utils/apiCall';
+import { fetchEducations } from '@/redux/educations/educationAction';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
 export default function Home() {
+    const { educations, loading } = useAppSelector((state) => state.education);
+    const dispatch = useAppDispatch();
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await apiCall({ url: 'todos/1' });
-                console.log('API Response:', data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
+        dispatch(fetchEducations());
     }, []);
 
     return (
@@ -27,6 +21,15 @@ export default function Home() {
                 width={200}
                 height={200}
             />
+            {educations.map((education) => (
+                <div
+                    key={education.id}
+                    className="bg-gray-100 p-4 rounded-lg shadow-md"
+                >
+                    <h2 className="text-xl font-bold">{education.name}</h2>
+                    <p className="text-lg">{education.degree}</p>
+                </div>
+            ))}
             <p className="text-lg text-center">
                 Get started by editing <code>pages/index.tsx</code>
             </p>
