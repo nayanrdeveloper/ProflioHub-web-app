@@ -8,7 +8,7 @@ export const fetchEducations = () => async (dispatch: AppDispatch) => {
         const response = (await apiCall({
             url: '/todos/1',
             method: 'GET',
-        })) as { data: any };
+        })) as { data: { id: number; name: string; degree: string }[] };
         console.log(response.data);
         const educationSampled = [
             {
@@ -18,8 +18,12 @@ export const fetchEducations = () => async (dispatch: AppDispatch) => {
             },
         ];
         dispatch(setEducations(educationSampled));
-    } catch (error: any) {
-        dispatch(setError(error.message));
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            dispatch(setError(error.message));
+        } else {
+            dispatch(setError('An unknown error occurred'));
+        }
     } finally {
         dispatch(setLoading(false));
     }
