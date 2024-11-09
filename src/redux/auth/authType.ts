@@ -30,10 +30,10 @@ export interface AuthResponsePayload {
 }
 
 type LoginField = 'email' | 'password';
-type RegistrationField = 'email' | 'password' | 'confirmPassword';
+type RegistrationField = 'email' | 'password' | 'firstName' | 'lastName';
 
 // Payload for field update actions
-export interface UpdateFieldPayload<T extends LoginField | RegistrationField> {
-    field: string;
+export interface UpdateFieldPayload {
+    field: LoginField | RegistrationField;
     value: string;
 }

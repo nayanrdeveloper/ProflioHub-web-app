@@ -8,22 +8,19 @@ const authSlice = createSlice({
     reducers: {
         updateLoginField: (
             state,
-            action: PayloadAction<UpdateFieldPayload<'email' | 'password'>>
+            action: PayloadAction<UpdateFieldPayload>
         ) => {
             state.login[action.payload.field as 'email' | 'password'] =
                 action.payload.value;
         },
         updateRegistrationField: (
             state,
-            action: PayloadAction<
-                UpdateFieldPayload<'email' | 'password' | 'confirmPassword'>
-            >
+            action: PayloadAction<UpdateFieldPayload>
         ) => {
             state.registration[
                 action.payload.field as
                     | 'email'
                     | 'password'
-                    | 'confirmPassword'
                     | 'firstName'
                     | 'lastName'
             ] = action.payload.value;

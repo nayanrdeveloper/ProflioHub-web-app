@@ -33,7 +33,7 @@ export default function AuthPage() {
                 <div className="mt-6 text-sm text-gray-600">
                     {isLogin ? (
                         <>
-                            Don't have an account?{' '}
+                            Don&apos;t have an account?{' '}
                             <button
                                 onClick={toggleAuthMode}
                                 className="text-primary font-semibold hover:underline"

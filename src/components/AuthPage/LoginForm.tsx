@@ -12,7 +12,9 @@ const LoginForm: React.FC = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        dispatch(updateLoginField({ field: name, value }));
+        dispatch(
+            updateLoginField({ field: name as 'email' | 'password', value })
+        );
     };
 
     return (

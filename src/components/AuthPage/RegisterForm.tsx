@@ -11,7 +11,10 @@ const RegisterForm: React.FC = () => {
     );
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target as {
+            name: 'email' | 'password' | 'firstName' | 'lastName';
+            value: string;
+        };
         dispatch(updateRegistrationField({ field: name, value }));
     };
 
