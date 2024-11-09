@@ -4,6 +4,7 @@ import { fetchEducations } from '@/redux/educations/educationAction';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
     const { educations, loading } = useAppSelector((state) => state.education);
@@ -33,6 +34,9 @@ export default function Home() {
             <p className="text-lg text-center">
                 Get started by editing <code>pages/index.tsx</code>
             </p>
+            <div>
+                <Button>Click me</Button>
+            </div>
         </div>
     );
 }
