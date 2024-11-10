@@ -1,7 +1,8 @@
 export interface User {
     id: string | null;
-    name: string | null;
     email: string | null;
+    firstName: string | null;
+    lastName: string | null;
 }
 
 export interface AuthState {
@@ -16,7 +17,6 @@ export interface AuthState {
         firstName: string;
         lastName: string;
         password: string;
-        confirmPassword: string;
         loading: boolean;
         error: string | null;
     };
@@ -25,7 +25,8 @@ export interface AuthState {
 
 export interface AuthResponsePayload {
     id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
 }
 

@@ -12,13 +12,8 @@ export const authInitialState: AuthState = {
         password: '',
         firstName: '',
         lastName: '',
-        confirmPassword: '',
         loading: false,
         error: null,
     },
-    user: {
-        id: null,
-        name: null,
-        email: null,
-    },
+    user: { id: null, email: null, firstName: null, lastName: null },
 };

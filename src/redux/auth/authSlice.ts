@@ -8,10 +8,12 @@ const authSlice = createSlice({
     reducers: {
         updateLoginField: (
             state,
-            action: PayloadAction<UpdateFieldPayload>
+            action: PayloadAction<{
+                field: 'email' | 'password';
+                value: string;
+            }>
         ) => {
-            state.login[action.payload.field as 'email' | 'password'] =
-                action.payload.value;
+            state.login[action.payload.field] = action.payload.value;
         },
         updateRegistrationField: (
             state,
@@ -26,16 +28,33 @@ const authSlice = createSlice({
             ] = action.payload.value;
         },
         // Login actions
-        loginStart: (state) => {
-            state.login.loading = true;
-            state.login.error = null;
+        setLoading: (state, action: PayloadAction<boolean>) => {
+            state.login.loading = action.payload;
         },
-        loginSuccess: (state, action: PayloadAction<AuthResponsePayload>) => {
-            state.login.loading = false;
+        setUser: (
+            state,
+            action: PayloadAction<{
+                id: string;
+                email: string;
+                firstName: string;
+                lastName: string;
+            }>
+        ) => {
             state.user = action.payload;
         },
-        loginFailure: (state, action: PayloadAction<string>) => {
-            state.login.loading = false;
+
+        logout: (state) => {
+            state.user = {
+                id: null,
+                email: null,
+                firstName: null,
+                lastName: null,
+            };
+            localStorage.removeItem('token');
+            document.cookie =
+                'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+        },
+        setError: (state, action: PayloadAction<string | null>) => {
             state.login.error = action.payload;
         },
 
@@ -61,9 +80,10 @@ const authSlice = createSlice({
 export const {
     updateLoginField,
     updateRegistrationField,
-    loginStart,
-    loginSuccess,
-    loginFailure,
+    setLoading,
+    setError,
+    setUser,
+    logout,
     registerStart,
     registerSuccess,
     registerFailure,
