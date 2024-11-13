@@ -1,8 +1,7 @@
-import Dashboard from '@/components/Dashboard/Dashboard';
 import React from 'react';
 
 const DashboardPage: React.FC = () => {
-    return <Dashboard />;
+    return <h1 className="text-2xl font-semibold">Dashboard Home</h1>;
 };
 
 export default DashboardPage;
